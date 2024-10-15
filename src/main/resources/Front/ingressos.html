@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Ingressos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/ingressos.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="h5">Gerenciamento de Ingressos</h1>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ingressoModal">Emitir Ingresso</button>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Evento</th>
+                    <th>Participante</th>
+                    <th>Pago</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="ingressos-tbody">
+                <!-- Ingressos serão listados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Emitir Ingresso -->
+    <div class="modal fade" id="ingressoModal" tabindex="-1" aria-labelledby="ingressoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h6" id="ingressoModalLabel">Emitir Ingresso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="evento-id">Selecionar Evento</label>
+                        <select id="evento-id" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participante-id">Selecionar Participante</label>
+                        <select id="participante-id" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pago">Pago</label>
+                        <input type="checkbox" id="pago">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="emitirIngresso()">Emitir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Atualizar Ingresso -->
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" aria-labelledby="modalAtualizarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h6" id="modalAtualizarLabel">Atualizar Ingresso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="atualizar-id">
+                    <div class="form-group">
+                        <label for="atualizar-evento-id">ID do Evento</label>
+                        <input type="number" id="atualizar-evento-id" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="atualizar-participante-id">ID do Participante</label>
+                        <input type="number" id="atualizar-participante-id" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="atualizar-pago">Pago</label>
+                        <input type="checkbox" id="atualizar-pago">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm"
+                        onclick="atualizarIngresso()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

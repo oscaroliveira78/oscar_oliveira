@@ -1,0 +1,17 @@
+# Configurações específicas para o perfil PROD
+---
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb  # URL do MySQL local
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root  # Nome de usuário do MySQL
+    password: root  # Senha do MySQL
+    hikari:
+      maximum-pool-size: 10  # Tamanho máximo do pool de conexões
+  jpa:
+    hibernate:
+      ddl-auto: update  # Atualiza o esquema do banco de dados automaticamente
+    show-sql: false  # Exibe as consultas SQL no console
+  logging:
+    level:
+      org.hibernate.SQL: debug  # Para exibir as consultas geradas no log

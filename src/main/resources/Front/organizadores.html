@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Organizadores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/organizadores.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Gerenciamento de Organizadores</h1>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#organizadorModal">Adicionar
+            Organizador</button>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Contato</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="organizadores-tbody">
+                <!-- Organizadores serão listados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Adicionar Organizador -->
+    <div class="modal fade" id="organizadorModal" tabindex="-1" aria-labelledby="organizadorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="organizadorModalLabel">Adicionar Organizador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contato">Contato</label>
+                        <input type="text" id="contato" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="criarOrganizador()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Atualizar Organizador -->
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" aria-labelledby="modalAtualizarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAtualizarLabel">Atualizar Organizador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="atualizar-id">
+                    <div class="form-group">
+                        <label for="atualizar-nome">Nome</label>
+                        <input type="text" id="atualizar-nome" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="atualizar-contato">Contato</label>
+                        <input type="text" id="atualizar-contato" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm"
+                        onclick="atualizarOrganizador()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

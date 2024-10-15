@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Organizador" as Organizer
+actor "Colaborador" as Collaborator
+rectangle "Sistema de Gerenciamento de Eventos" {
+  usecase "Criar Evento" as UC1
+  usecase "Gerenciar Evento" as UC2
+  usecase "Adicionar Localização" as UC3
+  usecase "Adicionar Participantes" as UC4
+}
+Organizer -- UC1
+Organizer -- UC2
+Organizer -- UC3
+Organizer -- UC4
+Collaborator -- UC4
+@enduml

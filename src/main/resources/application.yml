@@ -1,0 +1,23 @@
+server:
+  port: 8182 
+ 
+
+spring:
+  application:
+    name: oscar_oliveira
+  profiles: # dev ou prod (${spring_profile})
+    active: prod   
+    
+    
+# Configurações específicas para perfis
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

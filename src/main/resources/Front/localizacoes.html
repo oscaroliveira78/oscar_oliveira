@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Localizações</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/localizacoes.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Gerenciamento de Localizações</h1>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#localizacaoModal">Adicionar
+            Localização</button>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Endereço</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="localizacoes-tbody">
+                <!-- Localizações serão listadas aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Adicionar Localização -->
+    <div class="modal fade" id="localizacaoModal" tabindex="-1" aria-labelledby="localizacaoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="localizacaoModalLabel">Adicionar Localização</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="endereco">Endereço</label>
+                        <input type="text" id="endereco" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" id="estado" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="criarLocalizacao()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Atualizar Localização -->
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" aria-labelledby="modalAtualizarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAtualizarLabel">Atualizar Localização</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="atualizar-id">
+                    <div class="form-group">
+                        <label for="atualizar-endereco">Endereço</label>
+                        <input type="text" id="atualizar-endereco" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="atualizar-cidade">Cidade</label>
+                        <input type="text" id="atualizar-cidade" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="atualizar-estado">Estado</label>
+                        <input type="text" id="atualizar-estado" class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-sm"
+                        onclick="atualizarLocalizacao()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

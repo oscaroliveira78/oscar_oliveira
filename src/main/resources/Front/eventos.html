@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Eventos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Gerenciamento de Eventos</h1>
+
+        <!-- formulário de criação de evento -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h5">Criar Novo Evento</h2>
+            </div>
+            <div class="card-body">
+                <form id="formEvento">
+                    <div class="form-group">
+                        <label for="nome">Nome do Evento</label>
+                        <input type="text" class="form-control form-control-sm" id="nome"
+                            placeholder="Digite o nome do evento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea class="form-control form-control-sm" id="descricao"
+                            placeholder="Digite a descrição do evento" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataHora">Data e Hora</label>
+                        <input type="datetime-local" class="form-control form-control-sm" id="dataHora" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="qtdeAssentos">Quantidade de Assentos</label>
+                        <input type="number" class="form-control form-control-sm" id="qtdeAssentos" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preço (R$)</label>
+                        <input type="number" class="form-control form-control-sm" id="preco" step="0.01" min="0"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="organizador">Organizador</label>
+                        <select class="form-control form-control-sm" id="organizador" required>
+                            <option value="">Selecione um organizador</option>
+                            <!-- As opções serão preenchidas pelo JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="localizacao">Localização</label>
+                        <select class="form-control form-control-sm" id="localizacao" required>
+                            <option value="">Selecione uma localização</option>
+                            <!-- As opções serão preenchidas pelo JavaScript -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Criar Evento</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- listagem de eventos -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h5">Lista de Eventos</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-sm" id="tabelaEventos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Assentos Vendidos</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- as linhas serão adicionadas dinamicamente com javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal de edição de evento -->
+    <div class="modal fade" id="modalEditarEvento" tabindex="-1" aria-labelledby="modalEditarEventoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarEventoLabel">Editar Evento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarEvento">
+                        <input type="hidden" id="editarId">
+                        <div class="form-group">
+                            <label for="editarNome">Nome do Evento</label>
+                            <input type="text" class="form-control form-control-sm" id="editarNome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarDescricao">Descrição</label>
+                            <textarea class="form-control form-control-sm" id="editarDescricao" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarDataHora">Data e Hora</label>
+                            <input type="datetime-local" class="form-control form-control-sm" id="editarDataHora"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarQtdeAssentos">Quantidade de Assentos</label>
+                            <input type="number" class="form-control form-control-sm" id="editarQtdeAssentos" min="1"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarPreco">Preço (R$)</label>
+                            <input type="number" class="form-control form-control-sm" id="editarPreco" step="0.01"
+                                min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarOrganizador">Organizador</label>
+                            <select class="form-control form-control-sm" id="editarOrganizador" required>
+                                <!-- As opções serão preenchidas pelo JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editarLocalizacao">Localização</label>
+                            <select class="form-control form-control-sm" id="editarLocalizacao" required>
+                                <!-- As opções serão preenchidas pelo JavaScript -->
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap 4 e jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- javascript para integração com a api -->
+    <script src="./js/eventos.js"></script>
+</body>
+
+</html>

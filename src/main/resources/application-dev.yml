@@ -1,0 +1,19 @@
+# Configurações específicas para perfis DEV
+---
+spring:
+    
+  datasource:
+    url: jdbc:h2:mem:testdb  # Usando um banco de dados em memória
+    driver-class-name: org.h2.Driver
+    username: sa  # Nome de usuário padrão
+    password: ''   # Senha padrão, geralmente em branco
+    hikari:
+      maximum-pool-size: 10  # Tamanho máximo do pool de conexões
+  h2:
+    console:
+      enabled: true  # Habilitar o console H2
+      path: /h2-console  # Caminho do console
+  jpa:
+    hibernate:
+      ddl-auto: update  # Atualiza o esquema do banco de dados automaticamente
+    show-sql: true  # Mostrar as queries SQL no console

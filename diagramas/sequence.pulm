@@ -1,0 +1,23 @@
+@startuml
+actor "Organizador" as Organizer
+participant "Sistema de Gerenciamento de Eventos" as System
+participant "Localizacao" as Location
+participant "Participante" as Participant
+
+Organizer -> System : Criar Evento(evento)
+activate System
+System -> Location : Adicionar Localização(localizacao)
+activate Location
+Location -> System : Localização adicionada
+deactivate Location
+System -> System : Evento criado
+deactivate System
+
+Organizer -> System : Adicionar Participantes(participante)
+activate System
+System -> Participant : Registrar Participante(participante)
+activate Participant
+Participant -> System : Participante registrado
+deactivate Participant
+deactivate System
+@enduml

@@ -1,0 +1,11 @@
+Organizador: nome:Ana Silva; contato:ana.silva@example.com
+Organizador: nome:João Pereira; contato:joao.pereira@example.com
+Localizacao: endereco:Avenida das Flores, 123; cidade:Bela Vista; estado:Paraíso
+Localizacao: endereco:Rua dos Pássaros, 456; cidade:Serra Azul; estado:Esperança
+Evento: nome:Festa da Primavera; descricao:Uma celebração da estação das flores; dataHora:14/10/2024 15:30; qtdeAssentos:2; preco:50.0; organizadorId:1; localizacaoId:1
+Evento: nome:Concerto das Estrelas; descricao:Um espetáculo musical sob o céu noturno; dataHora:15/10/2024 18:00; qtdeAssentos:200; preco:75.0; organizadorId:2; localizacaoId:2
+Participante: nome:Camila Oliveira; email:camila.oliveira@example.com; telefone:123456789
+Participante: nome:Lucas Mendes; email:lucas.mendes@example.com; telefone:987654321
+Ingresso: eventoId:1; participanteId:1; pago:true
+Ingresso: eventoId:1; participanteId:2; pago:false
+Ingresso: eventoId:1; participanteId:2; pago:true  # Tentativa extra, ingressos devem estar esgotados
