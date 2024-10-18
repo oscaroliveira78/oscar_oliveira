@@ -46,6 +46,9 @@ ingressos e localizações.
     - `deletarIngresso(Long id)`: Remove um ingresso pelo ID.
     - `buscarIngressoPorId(Long id)`: Busca um ingresso pelo ID.
     - `listarIngressos()`: Lista todos os ingressos emitidos.
+    
+- **[18/10/2024]**
+- **ApiClientViaCep**: Interface responsavel por buscar um endereço (localização) pelo cep.
 
 ### Repositórios
 
@@ -89,6 +92,7 @@ Define as operações relacionadas à criação, atualização, listagem e exclu
 - **Buscar Localização por ID** (`GET /localizacoes/{id}`): Busca uma localização pelo seu ID.
 - **Atualizar Localização** (`PUT /localizacoes/{id}`): Atualiza uma localização existente.
 - **Deletar Localização** (`DELETE /localizacoes/{id}`): Remove uma localização pelo ID.
+- **Buscar Localização pelo CEP** (`GET /localizacoes/cep/{cep}`): Busca uma localização em uma API externa pelo CEP.
 
 ### **OrganizadorController**
 

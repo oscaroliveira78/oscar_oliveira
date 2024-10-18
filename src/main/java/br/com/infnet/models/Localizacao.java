@@ -19,11 +19,13 @@ public class Localizacao {
 	@SequenceGenerator(name = "id_generator", sequenceName = "global_sequence", allocationSize = 1)
 	private Long id;
 
+	private String cep;
 	private String endereco;
 	private String cidade;
 	private String estado;
 
-	public Localizacao(String endereco, String cidade, String estado) {
+	public Localizacao(String cep, String endereco, String cidade, String estado) {
+		this.cep = cep;
 		this.endereco = endereco;
 		this.cidade = cidade;
 		this.estado = estado;

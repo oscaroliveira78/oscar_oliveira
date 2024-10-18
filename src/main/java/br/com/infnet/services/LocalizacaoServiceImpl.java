@@ -1,5 +1,6 @@
 package br.com.infnet.services;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,15 @@ public class LocalizacaoServiceImpl {
     public void atualizarLocalizacao(Localizacao localizacao) {
         localizacaoRepository.save(localizacao);
     }
-
-    public void deletarLocalizacao(Long id) {
-        localizacaoRepository.deleteById(id);
+    
+    public void deletarLocalizacao(Long id) throws SQLIntegrityConstraintViolationException {
+    	
+    	try {
+    		localizacaoRepository.deleteById(id);
+		} catch (Exception e) {
+			throw new SQLIntegrityConstraintViolationException();
+		}
+        
     }
 
     public Localizacao buscarLocalizacaoPorId(Long id) {

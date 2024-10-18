@@ -115,19 +115,58 @@ async function atualizarLocalizacao() {
 
 async function deletarLocalizacao(id) {
     if (confirm('Tem certeza que deseja deletar esta localização?')) {
-        const response = await fetch(`${baseUrl}/${id}`, {
-            method: 'DELETE'
-        });
+        try {
+            const response = await fetch(`${baseUrl}/${id}`, {
+                method: 'DELETE'
+            });
 
-        if (response.ok) {
-            alert('Localização deletada com sucesso!');
-            listarLocalizacoes();
-        } else {
-            alert('Erro ao deletar localização.');
+            if (response.ok) {
+                alert('Localização deletada com sucesso!');
+                listarLocalizacoes();
+            } else {
+                const errorMessage = await response.text(); 
+                alert(`Erro ao deletar localização: ${errorMessage}`); 
+            }
+        } catch (error) {
+            console.error('Erro ao chamar a API:', error);
+            alert('Erro inesperado ao tentar deletar a localização.');
         }
     }
 }
-
 $(document).ready(function () {
     listarLocalizacoes();
 });
+
+async function buscarEndereco() {
+    const cep = document.getElementById('cep').value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const loader = document.getElementById('loader');
+    
+    if (cep.length === 8) {
+        loader.classList.remove('d-none'); // Mostra o loader
+        try {
+            const response = await fetch(`${baseUrl}/cep/${cep}`);
+            const data = await response.json();
+
+
+            if (!data.cep && !data.logradouro && !data.unidade && !data.bairro && !data.uf && !data.estado) {
+                alert('CEP não encontrado. Por favor, verifique o número digitado.');
+                
+                // Limpa os campos
+                document.getElementById('endereco').value = '';
+                document.getElementById('cidade').value = '';
+                document.getElementById('estado').value = '';
+            } else {
+                document.getElementById('endereco').value = data.logradouro || '';
+                document.getElementById('cidade').value = data.bairro || '';
+                document.getElementById('estado').value = data.uf || '';
+            }
+        } catch (error) {
+            console.error('Erro ao buscar o endereço:', error);
+            alert('Erro ao buscar o endereço. Verifique o CEP.');
+        } finally {
+            loader.classList.add('d-none');
+        }
+    } else {
+        alert('CEP inválido. O CEP deve ter 8 dígitos.');
+    }
+}

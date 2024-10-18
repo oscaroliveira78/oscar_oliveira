@@ -158,11 +158,12 @@ public class DataLoader implements CommandLineRunner {
 
 		System.out.println("Criando localização...");
 		String[] partes = linha.split(";");
-		String endereco = partes[0].split(":")[2].trim();
-		String cidade = partes[1].split(":")[1].trim();
-		String estado = partes[2].split(":")[1].trim();
+		String cep = partes[0].split(":")[1].trim();
+		String endereco = partes[1].split(":")[2].trim();
+		String cidade = partes[2].split(":")[1].trim();
+		String estado = partes[3].split(":")[1].trim();
 		System.out.println("Localização na cidade '" + cidade + "' criada com sucesso!");
-		return new Localizacao(endereco, cidade, estado);
+		return new Localizacao(cep, endereco, cidade, estado);
 	}
 
 	private void criarIngresso(String linha, List<Participante> participantes) {
