@@ -1,6 +1,5 @@
 package br.com.infnet.controllers;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -57,12 +56,8 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletarLocalizacao(@PathVariable Long id) {
 
-		try {
-			localizacaoService.deletarLocalizacao(id);
-		} catch (SQLIntegrityConstraintViolationException e) {
+		localizacaoService.deletarLocalizacao(id);
 
-			return ResponseEntity.badRequest().body("Existem eventos vinculados a esta Localização, não será possível continuar!!!");
-		}
 		return ResponseEntity.noContent().build();
 	}
 

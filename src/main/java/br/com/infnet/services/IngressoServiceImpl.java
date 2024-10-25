@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.infnet.exceptions.NegocioException;
+import br.com.infnet.exceptions.TabelaDeErros;
 import br.com.infnet.models.Evento;
 import br.com.infnet.models.Ingresso;
 import br.com.infnet.models.Participante;
@@ -22,13 +24,10 @@ public class IngressoServiceImpl implements IngressoManager {
 
 	@Override
 	public void emitirIngresso(Ingresso ingresso) {
-		
-		System.out.println(ingresso);
-
-		Evento evento = eventoRepository.findById(ingresso.getEvento().getId()).orElseThrow(() -> new RuntimeException("Evento não encontrado"));
+		Evento evento = eventoRepository.findById(ingresso.getEvento().getId()).orElseThrow(() -> new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO));
 
 		Participante participante = participanteRepository.findById(ingresso.getParticipante().getId())
-				.orElseThrow(() -> new RuntimeException("Participante não encontrado"));
+				.orElseThrow(() -> new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO));
 
 		// Verifica se ainda há assentos disponíveis
 		if (evento.getQtdeVendida() < evento.getQtdeAssentos()) {
@@ -43,31 +42,37 @@ public class IngressoServiceImpl implements IngressoManager {
 			// Salva o ingresso
 			ingressoRepository.save(ingresso);
 		} else {
-			throw new RuntimeException("Ingressos esgotados para este evento");
+			throw new NegocioException(TabelaDeErros.INGRESSOS_ESGOTADOS); // Altere esta linha conforme necessário
 		}
 	}
 
 	@Override
 	public void atualizarIngresso(Ingresso ingresso) {
-		
+		if (!ingressoRepository.existsById(ingresso.getId())) {
+			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
+		}
 		ingressoRepository.save(ingresso);
 	}
 
 	@Override
 	public void deletarIngresso(Long id) {
-		
+		if (!ingressoRepository.existsById(id)) {
+			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
+		}
 		ingressoRepository.deleteById(id);
 	}
 
 	@Override
 	public Ingresso buscarIngressoPorId(Long id) {
-		
-		return ingressoRepository.findById(id).orElse(null);
+		return ingressoRepository.findById(id).orElseThrow(() -> new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO));
 	}
 
 	@Override
 	public List<Ingresso> listarIngressos() {
-		
-		return ingressoRepository.findAll();
+		List<Ingresso> ingressos = ingressoRepository.findAll();
+		if (ingressos.isEmpty()) {
+			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
+		}
+		return ingressos;
 	}
 }
