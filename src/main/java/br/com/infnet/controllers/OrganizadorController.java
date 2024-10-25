@@ -14,49 +14,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.infnet.controllers.openapi.OrganizadorControllerOpenApi;
 import br.com.infnet.models.Organizador;
 import br.com.infnet.services.OrganizadorServiceImpl;
 
 @RestController
 @RequestMapping("/organizadores")
 @CrossOrigin
-public class OrganizadorController {
+public class OrganizadorController implements OrganizadorControllerOpenApi {
 
-    @Autowired
-    private OrganizadorServiceImpl organizadorService;
+	@Autowired
+	private OrganizadorServiceImpl organizadorService;
 
-    @GetMapping
-    public List<Organizador> listarOrganizadores() {
-    	
-        return organizadorService.listarOrganizadores();
-    }
+	@GetMapping
+	public List<Organizador> listarOrganizadores() {
 
-    @PostMapping
-    public ResponseEntity<Organizador> criarOrganizador(@RequestBody Organizador organizador) {
-    	
-        organizadorService.criarOrganizador(organizador);
-        return ResponseEntity.ok(organizador);
-    }
+		return organizadorService.listarOrganizadores();
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Organizador> atualizarOrganizador(@PathVariable Long id, @RequestBody Organizador organizador) {
-    	
-        organizador.setId(id);
-        organizadorService.atualizarOrganizador(organizador);
-        return ResponseEntity.ok(organizador);
-    }
+	@PostMapping
+	public ResponseEntity<Organizador> criarOrganizador(@RequestBody Organizador organizador) {
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarOrganizador(@PathVariable Long id) {
-    	
-        organizadorService.deletarOrganizador(id);
-        return ResponseEntity.noContent().build();
-    }
+		organizadorService.criarOrganizador(organizador);
+		return ResponseEntity.ok(organizador);
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Organizador> buscarOrganizadorPorId(@PathVariable Long id) {
-    	
-        Organizador organizador = organizadorService.buscarOrganizadorPorId(id);
-        return organizador != null ? ResponseEntity.ok(organizador) : ResponseEntity.notFound().build();
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<Organizador> atualizarOrganizador(@PathVariable Long id, @RequestBody Organizador organizador) {
+
+		organizador.setId(id);
+		organizadorService.atualizarOrganizador(organizador);
+		return ResponseEntity.ok(organizador);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deletarOrganizador(@PathVariable Long id) {
+
+		organizadorService.deletarOrganizador(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Organizador> buscarOrganizadorPorId(@PathVariable Long id) {
+
+		Organizador organizador = organizadorService.buscarOrganizadorPorId(id);
+		return organizador != null ? ResponseEntity.ok(organizador) : ResponseEntity.notFound().build();
+	}
 }

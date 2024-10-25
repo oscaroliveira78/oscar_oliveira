@@ -8,6 +8,22 @@ spring:
   profiles: # dev ou prod (${spring_profile})
     active: prod   
     
+propriedades:
+  aplicacao:
+    nome: "@project.artifactId@"
+    versao: "@project.version@"
+    descricao: "@project.description@"
+    messageSource: messages
+
+springdoc:
+  packagesToScan: lab.controllers
+  swagger-ui:
+    path: /swagger/ui
+    enabled: true
+  api-docs:
+    path: /swagger/json
+    enabled: true    
+    
     
 # Configurações específicas para perfis
 ---

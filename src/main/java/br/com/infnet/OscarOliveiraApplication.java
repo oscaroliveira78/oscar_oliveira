@@ -12,6 +12,9 @@ public class OscarOliveiraApplication {
 		
 		SpringApplication.run(OscarOliveiraApplication.class, args);
 		
+		System.out.println("http://localhost:8182/swagger/ui");
+		System.out.println("http://localhost:8182/swagger/json");
+		
 	}
 
 }

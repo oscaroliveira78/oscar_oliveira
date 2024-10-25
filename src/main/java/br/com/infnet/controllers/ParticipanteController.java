@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.infnet.controllers.openapi.ParticipanteControllerOpenApi;
 import br.com.infnet.models.Participante;
 import br.com.infnet.services.ParticipanteServiceImpl;
 
 @RestController
 @RequestMapping("/participantes")
 @CrossOrigin
-public class ParticipanteController {
+public class ParticipanteController implements ParticipanteControllerOpenApi {
 
 	@Autowired
 	private ParticipanteServiceImpl participanteService;
@@ -32,14 +33,14 @@ public class ParticipanteController {
 
 	@PostMapping
 	public ResponseEntity<Participante> registrarParticipante(@RequestBody Participante participante) {
-		
+
 		participanteService.registrarParticipante(participante);
 		return ResponseEntity.ok(participante);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Participante> atualizarParticipante(@PathVariable Long id, @RequestBody Participante participante) {
-		
+
 		participante.setId(id);
 		participanteService.atualizarParticipante(participante);
 		return ResponseEntity.ok(participante);
@@ -47,14 +48,14 @@ public class ParticipanteController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarParticipante(@PathVariable Long id) {
-		
+
 		participanteService.deletarParticipante(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Participante> buscarParticipantePorId(@PathVariable Long id) {
-		
+
 		Participante participante = participanteService.buscarParticipantePorId(id);
 		return participante != null ? ResponseEntity.ok(participante) : ResponseEntity.notFound().build();
 	}

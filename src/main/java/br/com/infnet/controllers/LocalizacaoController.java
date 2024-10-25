@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.infnet.controllers.openapi.LocalizacaoControllerOpenApi;
 import br.com.infnet.infra.ApiClientViaCep;
 import br.com.infnet.models.Localizacao;
 import br.com.infnet.models.dtos.CepResponseDTO;
@@ -22,7 +23,7 @@ import br.com.infnet.services.LocalizacaoServiceImpl;
 @RestController
 @RequestMapping("/localizacoes")
 @CrossOrigin
-public class LocalizacaoController {
+public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 
 	private LocalizacaoServiceImpl localizacaoService;
 	private ApiClientViaCep apiClientViaCep;

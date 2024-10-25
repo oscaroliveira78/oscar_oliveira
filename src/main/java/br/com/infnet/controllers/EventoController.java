@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.infnet.controllers.openapi.EventoControllerOpenApi;
 import br.com.infnet.models.Evento;
 import br.com.infnet.services.EventoServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +23,27 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/eventos")
 @RequiredArgsConstructor
 @CrossOrigin
-public class EventoController {
+public class EventoController implements EventoControllerOpenApi {
 
 	private final EventoServiceImpl eventoService;
 
 	@PostMapping
 	public ResponseEntity<Evento> criarEvento(@RequestBody Evento evento) {
-		
+
 		eventoService.criarEvento(evento);
 		return ResponseEntity.status(HttpStatus.CREATED).body(evento);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Evento>> listarEventos() {
-		
+
 		List<Evento> eventos = eventoService.listarEventos();
 		return ResponseEntity.ok(eventos);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Evento> buscarEventoPorId(@PathVariable Long id) {
-		
+
 		Evento evento = eventoService.buscarEventoPorId(id);
 		if (evento != null) {
 			return ResponseEntity.ok(evento);
@@ -52,7 +53,7 @@ public class EventoController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable Long id, @RequestBody Evento eventoAtualizado) {
-		
+
 		Evento eventoExistente = eventoService.buscarEventoPorId(id);
 		if (eventoExistente != null) {
 			eventoAtualizado.setId(id); // Garante que o ID seja o mesmo do evento existente
@@ -64,7 +65,7 @@ public class EventoController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarEvento(@PathVariable Long id) {
-		
+
 		Evento evento = eventoService.buscarEventoPorId(id);
 		if (evento != null) {
 			eventoService.deletarEvento(id);
@@ -75,7 +76,7 @@ public class EventoController {
 
 	@PostMapping("/{id}/vender-ingresso")
 	public ResponseEntity<String> venderIngresso(@PathVariable Long id) {
-		
+
 		try {
 			eventoService.venderIngresso(id);
 			return ResponseEntity.ok("Ingresso vendido com sucesso!");
