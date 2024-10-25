@@ -2,6 +2,8 @@ package br.com.infnet.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +30,7 @@ public class EventoController implements EventoControllerOpenApi {
 	private final EventoServiceImpl eventoService;
 
 	@PostMapping
-	public ResponseEntity<Evento> criarEvento(@RequestBody Evento evento) {
+	public ResponseEntity<Evento> criarEvento(@Valid @RequestBody Evento evento) {
 
 		eventoService.criarEvento(evento);
 		return ResponseEntity.status(HttpStatus.CREATED).body(evento);
@@ -52,7 +54,7 @@ public class EventoController implements EventoControllerOpenApi {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Evento> atualizarEvento(@PathVariable Long id, @RequestBody Evento eventoAtualizado) {
+	public ResponseEntity<Evento> atualizarEvento(@PathVariable Long id, @Valid @RequestBody Evento eventoAtualizado) {
 
 		Evento eventoExistente = eventoService.buscarEventoPorId(id);
 		if (eventoExistente != null) {

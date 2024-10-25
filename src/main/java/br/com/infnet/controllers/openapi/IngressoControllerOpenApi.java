@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.infnet.models.Ingresso;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -18,7 +20,14 @@ public interface IngressoControllerOpenApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ingresso emitido com sucesso."),
             @ApiResponse(responseCode = "404", description = "Evento ou participante não encontrado."),
-            @ApiResponse(responseCode = "400", description = "Ingressos esgotados ou erro de negócios.")
+            @ApiResponse(responseCode = "400", description = "Ingressos esgotados ou erro de negócios.",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "{\n" +
+                        "\"pago\": \"O ingresso deve estar marcado como pago.\"\n" +
+                    "}")
+                )
+            )
     })
 	public ResponseEntity<Ingresso> emitirIngresso(@RequestBody Ingresso ingresso);
 

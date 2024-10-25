@@ -2,6 +2,8 @@ package br.com.infnet.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,20 +35,20 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 	}
 
 	@GetMapping
-	public List<Localizacao> listarLocalizacoes() {
+	public ResponseEntity<List<Localizacao>> listarLocalizacoes() {
 
-		return localizacaoService.listarLocalizacoes();
+		return ResponseEntity.ok(localizacaoService.listarLocalizacoes());
 	}
 
 	@PostMapping
-	public ResponseEntity<Localizacao> criarLocalizacao(@RequestBody Localizacao localizacao) {
+	public ResponseEntity<Localizacao> criarLocalizacao(@Valid @RequestBody Localizacao localizacao) {
 
 		localizacaoService.criarLocalizacao(localizacao);
 		return ResponseEntity.ok(localizacao);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Localizacao> atualizarLocalizacao(@PathVariable Long id, @RequestBody Localizacao localizacao) {
+	public ResponseEntity<Localizacao> atualizarLocalizacao(@PathVariable Long id, @Valid @RequestBody Localizacao localizacao) {
 
 		localizacao.setId(id);
 		localizacaoService.atualizarLocalizacao(localizacao);

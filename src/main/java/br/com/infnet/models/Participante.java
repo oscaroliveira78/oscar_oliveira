@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +21,14 @@ public class Participante {
 	@SequenceGenerator(name = "id_generator", sequenceName = "global_sequence", allocationSize = 1)
 	private Long id;
 
+	@NotBlank(message = "O nome é obrigatório.")
 	private String nome;
+
+	@NotBlank(message = "O email é obrigatório.")
+	@Email(message = "O email deve ser válido.")
 	private String email;
+
+	@NotBlank(message = "O telefone é obrigatório.")
 	private String telefone;
 
 	public Participante(String nome, String email, String telefone) {

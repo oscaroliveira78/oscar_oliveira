@@ -2,6 +2,8 @@ package br.com.infnet.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +29,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 	private final IngressoServiceImpl ingressoService;
 
 	@PostMapping
-	public ResponseEntity<Ingresso> emitirIngresso(@RequestBody Ingresso ingresso) {
+	public ResponseEntity<Ingresso> emitirIngresso(@Valid @RequestBody Ingresso ingresso) {
 
 		ingressoService.emitirIngresso(ingresso);
 		return ResponseEntity.ok(ingresso);
@@ -48,7 +50,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Ingresso> atualizarIngresso(@PathVariable Long id, @RequestBody Ingresso ingresso) {
+	public ResponseEntity<Ingresso> atualizarIngresso(@PathVariable Long id, @Valid @RequestBody Ingresso ingresso) {
 
 		ingresso.setId(id);
 		ingressoService.atualizarIngresso(ingresso);

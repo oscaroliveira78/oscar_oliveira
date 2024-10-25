@@ -2,6 +2,8 @@ package br.com.infnet.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,20 +29,20 @@ public class OrganizadorController implements OrganizadorControllerOpenApi {
 	private OrganizadorServiceImpl organizadorService;
 
 	@GetMapping
-	public List<Organizador> listarOrganizadores() {
+	public ResponseEntity<List<Organizador>> listarOrganizadores() {
 
-		return organizadorService.listarOrganizadores();
+		return ResponseEntity.ok(organizadorService.listarOrganizadores());
 	}
 
 	@PostMapping
-	public ResponseEntity<Organizador> criarOrganizador(@RequestBody Organizador organizador) {
+	public ResponseEntity<Organizador> criarOrganizador(@Valid @RequestBody Organizador organizador) {
 
 		organizadorService.criarOrganizador(organizador);
 		return ResponseEntity.ok(organizador);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Organizador> atualizarOrganizador(@PathVariable Long id, @RequestBody Organizador organizador) {
+	public ResponseEntity<Organizador> atualizarOrganizador(@PathVariable Long id, @Valid @RequestBody Organizador organizador) {
 
 		organizador.setId(id);
 		organizadorService.atualizarOrganizador(organizador);

@@ -21,11 +21,23 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 public interface EventoControllerOpenApi {
 
-    @Operation(summary = "Cria um novo evento", description = "Cria um evento com os dados fornecidos.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Evento criado com sucesso."),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos.")
-    })
+	@Operation(summary = "Cria um novo evento", description = "Cria um evento com os dados fornecidos.")
+	@ApiResponses(value = {
+	        @ApiResponse(responseCode = "201", description = "Evento criado com sucesso."),
+	        @ApiResponse(responseCode = "400", description = "Dados inválidos.",
+	            content = @Content(
+	                mediaType = "application/json",
+	                examples = @ExampleObject(value = "{\n" +
+	                    "  \"nome\": \"Nome é obrigatório.\",\n" +
+	                    "  \"descricao\": \"Descrição não pode ser vazia.\",\n" +
+	                    "  \"dataHora\": \"Data e hora são obrigatórias.\",\n" +
+	                    "  \"qtdeAssentos\": \"Quantidade de assentos deve ser pelo menos 1.\",\n" +
+	                    "  \"qtdeVendida\": \"Quantidade vendida não pode ser negativa.\",\n" +
+	                    "  \"preco\": \"Preço não pode ser negativo.\"\n" +
+	                    "}")
+	            )
+	        )
+	})
 	public ResponseEntity<Evento> criarEvento(@RequestBody Evento evento);
 
     @Operation(summary = "Lista todos os eventos", description = "Retorna uma lista de todos os eventos cadastrados.")

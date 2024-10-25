@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -28,12 +31,28 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nome;
-	private String descricao;
-	private LocalDateTime dataHora;
-	private Integer qtdeAssentos;
-	private Integer qtdeVendida;
-	private Double preco;
+    @NotNull(message = "Nome é obrigatório.")
+    @NotEmpty(message = "Nome não pode ser vazio.")
+    private String nome;
+
+    @NotNull(message = "Descrição é obrigatória.")
+    @NotEmpty(message = "Descrição não pode ser vazia.")
+    private String descricao;
+
+    @NotNull(message = "Data e hora são obrigatórias.")
+    private LocalDateTime dataHora;
+
+    @NotNull(message = "Quantidade de assentos é obrigatória.")
+    @Min(value = 1, message = "Quantidade de assentos deve ser pelo menos 1.")
+    private Integer qtdeAssentos;
+
+    @NotNull(message = "Quantidade vendida é obrigatória.")
+    @Min(value = 0, message = "Quantidade vendida não pode ser negativa.")
+    private Integer qtdeVendida = 0; // Valor padrão de 0
+
+    @NotNull(message = "Preço é obrigatório.")
+    @Min(value = 0, message = "Preço não pode ser negativo.")
+    private Double preco;
 
 	@ManyToOne
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")

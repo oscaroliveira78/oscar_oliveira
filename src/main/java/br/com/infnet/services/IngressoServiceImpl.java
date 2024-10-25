@@ -48,6 +48,7 @@ public class IngressoServiceImpl implements IngressoManager {
 
 	@Override
 	public void atualizarIngresso(Ingresso ingresso) {
+		
 		if (!ingressoRepository.existsById(ingresso.getId())) {
 			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
 		}

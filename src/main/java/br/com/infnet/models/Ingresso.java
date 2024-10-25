@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.AssertTrue;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -33,7 +34,8 @@ public class Ingresso {
 	@JoinColumn(name = "participante_id", nullable = false)
 	private Participante participante;
 
-	private boolean pago;
+    @AssertTrue(message = "O ingresso deve estar marcado como pago.")
+    private boolean pago = false; // Define o valor padrão como false
 
 	public Ingresso(Evento evento, Participante participante, boolean pago) {
 		this.evento = evento;

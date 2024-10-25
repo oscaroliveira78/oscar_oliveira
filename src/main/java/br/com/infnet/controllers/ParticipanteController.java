@@ -2,6 +2,8 @@ package br.com.infnet.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,19 +29,19 @@ public class ParticipanteController implements ParticipanteControllerOpenApi {
 	private ParticipanteServiceImpl participanteService;
 
 	@GetMapping
-	public List<Participante> listarParticipantes() {
-		return participanteService.listarParticipantes();
+	public ResponseEntity<List<Participante>> listarParticipantes() {
+		return ResponseEntity.ok(participanteService.listarParticipantes());
 	}
 
 	@PostMapping
-	public ResponseEntity<Participante> registrarParticipante(@RequestBody Participante participante) {
+	public ResponseEntity<Participante> registrarParticipante(@Valid @RequestBody Participante participante) {
 
 		participanteService.registrarParticipante(participante);
 		return ResponseEntity.ok(participante);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Participante> atualizarParticipante(@PathVariable Long id, @RequestBody Participante participante) {
+	public ResponseEntity<Participante> atualizarParticipante(@PathVariable Long id, @Valid @RequestBody Participante participante) {
 
 		participante.setId(id);
 		participanteService.atualizarParticipante(participante);
