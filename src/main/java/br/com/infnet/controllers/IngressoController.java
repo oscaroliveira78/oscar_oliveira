@@ -28,6 +28,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 
 	private final IngressoServiceImpl ingressoService;
 
+	@Override
 	@PostMapping
 	public ResponseEntity<Ingresso> emitirIngresso(@Valid @RequestBody Ingresso ingresso) {
 
@@ -35,6 +36,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 		return ResponseEntity.ok(ingresso);
 	}
 
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Ingresso>> listarIngressos() {
 
@@ -42,6 +44,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 		return ResponseEntity.ok(ingressos);
 	}
 
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Ingresso> buscarIngressoPorId(@PathVariable Long id) {
 
@@ -49,6 +52,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 		return ingresso != null ? ResponseEntity.ok(ingresso) : ResponseEntity.notFound().build();
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Ingresso> atualizarIngresso(@PathVariable Long id, @Valid @RequestBody Ingresso ingresso) {
 
@@ -57,6 +61,7 @@ public class IngressoController implements IngressoControllerOpenApi {
 		return ResponseEntity.ok(ingresso);
 	}
 
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarIngresso(@PathVariable Long id) {
 

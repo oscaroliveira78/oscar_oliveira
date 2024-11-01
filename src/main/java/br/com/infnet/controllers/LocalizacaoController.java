@@ -34,12 +34,14 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 		this.apiClientViaCep = apiClientViaCep;
 	}
 
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Localizacao>> listarLocalizacoes() {
 
 		return ResponseEntity.ok(localizacaoService.listarLocalizacoes());
 	}
 
+	@Override
 	@PostMapping
 	public ResponseEntity<Localizacao> criarLocalizacao(@Valid @RequestBody Localizacao localizacao) {
 
@@ -47,6 +49,7 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 		return ResponseEntity.ok(localizacao);
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Localizacao> atualizarLocalizacao(@PathVariable Long id, @Valid @RequestBody Localizacao localizacao) {
 
@@ -55,6 +58,7 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 		return ResponseEntity.ok(localizacao);
 	}
 
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletarLocalizacao(@PathVariable Long id) {
 
@@ -63,6 +67,7 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Localizacao> buscarLocalizacaoPorId(@PathVariable Long id) {
 
@@ -70,6 +75,7 @@ public class LocalizacaoController implements LocalizacaoControllerOpenApi {
 		return localizacao != null ? ResponseEntity.ok(localizacao) : ResponseEntity.notFound().build();
 	}
 
+	@Override
 	@GetMapping("/cep/{cep}")
 	public ResponseEntity<CepResponseDTO> buscarCep(@PathVariable String cep) throws InterruptedException {
 

@@ -29,6 +29,7 @@ public class EventoController implements EventoControllerOpenApi {
 
 	private final EventoServiceImpl eventoService;
 
+	@Override
 	@PostMapping
 	public ResponseEntity<Evento> criarEvento(@Valid @RequestBody Evento evento) {
 
@@ -36,6 +37,7 @@ public class EventoController implements EventoControllerOpenApi {
 		return ResponseEntity.status(HttpStatus.CREATED).body(evento);
 	}
 
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Evento>> listarEventos() {
 
@@ -43,6 +45,7 @@ public class EventoController implements EventoControllerOpenApi {
 		return ResponseEntity.ok(eventos);
 	}
 
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Evento> buscarEventoPorId(@PathVariable Long id) {
 
@@ -53,6 +56,7 @@ public class EventoController implements EventoControllerOpenApi {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable Long id, @Valid @RequestBody Evento eventoAtualizado) {
 
@@ -65,6 +69,7 @@ public class EventoController implements EventoControllerOpenApi {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarEvento(@PathVariable Long id) {
 
@@ -76,6 +81,7 @@ public class EventoController implements EventoControllerOpenApi {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
+	@Override
 	@PostMapping("/{id}/vender-ingresso")
 	public ResponseEntity<String> venderIngresso(@PathVariable Long id) {
 
@@ -86,4 +92,5 @@ public class EventoController implements EventoControllerOpenApi {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
+
 }

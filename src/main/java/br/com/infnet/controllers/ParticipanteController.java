@@ -28,11 +28,13 @@ public class ParticipanteController implements ParticipanteControllerOpenApi {
 	@Autowired
 	private ParticipanteServiceImpl participanteService;
 
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Participante>> listarParticipantes() {
 		return ResponseEntity.ok(participanteService.listarParticipantes());
 	}
 
+	@Override
 	@PostMapping
 	public ResponseEntity<Participante> registrarParticipante(@Valid @RequestBody Participante participante) {
 
@@ -40,6 +42,7 @@ public class ParticipanteController implements ParticipanteControllerOpenApi {
 		return ResponseEntity.ok(participante);
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Participante> atualizarParticipante(@PathVariable Long id, @Valid @RequestBody Participante participante) {
 
@@ -48,6 +51,7 @@ public class ParticipanteController implements ParticipanteControllerOpenApi {
 		return ResponseEntity.ok(participante);
 	}
 
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarParticipante(@PathVariable Long id) {
 
@@ -55,6 +59,7 @@ public class ParticipanteController implements ParticipanteControllerOpenApi {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Participante> buscarParticipantePorId(@PathVariable Long id) {
 

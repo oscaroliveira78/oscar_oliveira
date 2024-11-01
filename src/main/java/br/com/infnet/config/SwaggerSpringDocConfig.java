@@ -13,7 +13,7 @@ import io.swagger.v3.oas.models.info.License;
 public class SwaggerSpringDocConfig {
 
     @Bean
-    public OpenAPI springOpenAPI() {
+    OpenAPI springOpenAPI() {
         return new OpenAPI()
                 .info(info())
                 .components(new Components());

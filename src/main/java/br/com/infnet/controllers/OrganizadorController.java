@@ -28,12 +28,14 @@ public class OrganizadorController implements OrganizadorControllerOpenApi {
 	@Autowired
 	private OrganizadorServiceImpl organizadorService;
 
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Organizador>> listarOrganizadores() {
 
 		return ResponseEntity.ok(organizadorService.listarOrganizadores());
 	}
 
+	@Override
 	@PostMapping
 	public ResponseEntity<Organizador> criarOrganizador(@Valid @RequestBody Organizador organizador) {
 
@@ -41,6 +43,7 @@ public class OrganizadorController implements OrganizadorControllerOpenApi {
 		return ResponseEntity.ok(organizador);
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Organizador> atualizarOrganizador(@PathVariable Long id, @Valid @RequestBody Organizador organizador) {
 
@@ -49,6 +52,7 @@ public class OrganizadorController implements OrganizadorControllerOpenApi {
 		return ResponseEntity.ok(organizador);
 	}
 
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarOrganizador(@PathVariable Long id) {
 
@@ -56,6 +60,7 @@ public class OrganizadorController implements OrganizadorControllerOpenApi {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Organizador> buscarOrganizadorPorId(@PathVariable Long id) {
 

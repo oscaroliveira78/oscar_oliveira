@@ -1,7 +1,6 @@
 server:
   port: 8182 
  
-
 spring:
   application:
     name: oscar_oliveira
@@ -16,7 +15,7 @@ propriedades:
     messageSource: messages
 
 springdoc:
-  packagesToScan: lab.controllers
+  packagesToScan: br.com.infnet
   swagger-ui:
     path: /swagger/ui
     enabled: true
