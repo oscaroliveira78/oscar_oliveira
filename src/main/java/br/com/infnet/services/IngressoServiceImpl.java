@@ -2,6 +2,7 @@ package br.com.infnet.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.infnet.exceptions.NegocioException;

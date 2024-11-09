@@ -2,6 +2,7 @@ package br.com.infnet.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.infnet.exceptions.NegocioException;
@@ -44,7 +45,7 @@ public class EventoServiceImpl implements EventoManager {
 
 	@Override
 	public List<Evento> listarEventos() {
-		List<Evento> eventos = eventoRepository.findAll();
+		List<Evento> eventos = eventoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		if (eventos.isEmpty()) {
 			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
 		}

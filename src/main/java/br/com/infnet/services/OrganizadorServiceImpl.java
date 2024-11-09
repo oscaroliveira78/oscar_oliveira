@@ -2,6 +2,7 @@ package br.com.infnet.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.infnet.exceptions.NegocioException;
@@ -44,7 +45,7 @@ public class OrganizadorServiceImpl implements OrganizadorManager {
 
 	@Override
 	public List<Organizador> listarOrganizadores() {
-		List<Organizador> organizadores = organizadorRepository.findAll();
+		List<Organizador> organizadores = organizadorRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		if (organizadores.isEmpty()) {
 			throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
 		}

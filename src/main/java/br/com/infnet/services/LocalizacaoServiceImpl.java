@@ -3,6 +3,7 @@ package br.com.infnet.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.infnet.exceptions.NegocioException;
@@ -22,7 +23,7 @@ public class LocalizacaoServiceImpl {
     }
 
     public List<Localizacao> listarLocalizacoes() {
-        List<Localizacao> localizacoes = localizacaoRepository.findAll();
+        List<Localizacao> localizacoes = localizacaoRepository.findAll(Sort.by(Sort.Direction.ASC, "endereco"));
         if (localizacoes.isEmpty()) {
             throw new NegocioException(TabelaDeErros.REGISTRO_NAO_ENCONTRADO);
         }
